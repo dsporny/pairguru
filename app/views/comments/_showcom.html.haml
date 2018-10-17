@@ -1,0 +1,7 @@
+- @movie.comments.each do |comment|
+  .well
+    %p
+      %strong= comment.user.name
+      \:
+      =comment.body
+      =link_to '[X]', [comment.movie, comment], method: :delete, data: { confirm: 'Are you sure?' }

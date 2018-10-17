@@ -1,0 +1,8 @@
+%h3 Add Comment
+= form_for([@movie, @movie.comments.build]) do |f|
+  %p
+    = f.label :body
+    %br/
+    = f.text_area(:body, {:class => 'form-control'})
+  %p
+    = f.submit({:class => 'btn btn-default'})
