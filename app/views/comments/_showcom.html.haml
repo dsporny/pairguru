@@ -4,5 +4,6 @@
       %strong= comment.user.name
       \:
       = comment.body
+      %p= comment.created_at
       - if comment.user == current_user
         =link_to '[X]', [comment.movie, comment], method: :delete, data: { confirm: 'Are you sure?' }

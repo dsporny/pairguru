@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
-	def leaderboard
-		@users = ser.select("name, COUNT(*) AS comments_count")
-      .joins(:comments)
-      .where("comments.created_at > ?", Time.zone.today - 7)
-      .group(:name)
-      .order("comments_count DESC")
-      .limit(10)	
+	def commboard
+		@users = User.select("name, COUNT(DISTINCT comment_id) as comment_count")
+		.joins(:comments)
+		.where("comments.created_at > ?", Time.zone.today - 7)
+		.group(:name)
+		.limit(10)
+		.order("comments_count DESC")
 	end
 end
