@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, :set_movie
-  before_action :set_comment, only: :destroy
+  before_action :authenticate_user!, :find_movie
+  before_action :find_comment, only: :destroy
 
   def index
   	@comment = Comment.all
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      flash[:succes] = "Comment added"
+      flash[:notice] = "Comment added"
     else
       flash[:alert] = "You can only add 1 comment per movie"
     end
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      flash[:notice] = "Comment removed"
+      flash[:succes] = "Comment removed"
     else
       flash[:alert] = @comment.errors.full_messages.join(", ")
     end
@@ -30,15 +30,15 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_comment
+  def find_comment
     @comment = Comment.find(params[:id])
   end
 
-  def set_movie
+  def find_movie
     @movie = Movie.find(params[:movie_id])
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:body)
   end
 end

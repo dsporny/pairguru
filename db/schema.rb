@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2018_10_17_090718) do
 
   create_table "comments", force: :cascade do |t|
+    t.string "username"
     t.text "body"
     t.integer "movie_id"
     t.integer "user_id"

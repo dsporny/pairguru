@@ -3,5 +3,6 @@
     %p
       %strong= comment.user.name
       \:
-      =comment.body
-      =link_to '[X]', [comment.movie, comment], method: :delete, data: { confirm: 'Are you sure?' }
+      = comment.body
+      - if comment.user == current_user
+        =link_to '[X]', [comment.movie, comment], method: :delete, data: { confirm: 'Are you sure?' }
